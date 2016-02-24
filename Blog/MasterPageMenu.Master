@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPageMenu.master.cs" Inherits="Assignment1.MasterPageMenu" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+         <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../Default.aspx">Music Blog</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse pull-right">
+         <asp:Panel runat="server" ID="LoginMenu" Visible="True">
+          <ul class="nav navbar-nav">
+            <li><a href="../Login.aspx">Login</a></li> 
+          </ul>
+         </asp:Panel>
+         <asp:Panel runat="server" ID="UserMenu" Visible="False">
+                        <ul class="nav navbar-nav">
+                            <li><a>
+                                <asp:Label ID="sessionFullNameLabel" runat="server" CssClass="menuitem"/> 
+                            </a></li>
+                            <li><a href="../EditUser.aspx">Edit Account</a></li>
+                            <li><a href="Default.aspx" validationgroup="logout" runat="server" onserverclick="Logout">Log Out</a></li>
+                        </ul>
+                    </asp:Panel>
+                    <asp:Panel runat="server" ID="Admin" Visible="False">
+                        <ul class="nav navbar-nav">
+                            <li><a>
+                                <asp:Label ID="sessionFullNameLabel2" runat="server" CssClass="menuitem"/>                              
+                            </a></li>
+                            <li><a href="../EditUser.aspx">Edit Account</a></li>
+                             <li><a href="/Admin/AdminHome.aspx">Administration</a></li>
+                            <li><a href="Default.aspx" validationgroup="logout" runat="server" onserverclick="Logout">Log Out</a></li>
+                        </ul>
+                    </asp:Panel>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+ 
+<!-- Content -->
+        <asp:SiteMapPath
+                        ID="Breadcrumb"
+                        runat="server"
+                        PathSeparator=">>"
+                        ParentLevelsDisplayed="1"
+                        PathDirection="RootToCurrent"
+                        RenderCurrentNodeAsLink="True"                        
+                        ShowToolTips="true"
+                        CssClass="breadcrumb">
+                        <NodeTemplate>
+                           <asp:HyperLink CssClass="breadcrumb" Text='<%# Eval("Title") %>' NavigateUrl='<%# Eval("Url") %>' runat="server" />                          
+                        </NodeTemplate>
+                    </asp:SiteMapPath>
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <ul class="nav nav-stacked affix">
+      <li> <a href="/Admin/AdminHome.aspx">Admin Home</a> </li>
+      <li> <a href="/Admin/AddBlogPost.aspx">Add Blog Post</a> </li>
+      <li> <a href="/Admin/BadWords.aspx">Bad Words</a> </li>
+    </ul>
+  </div>
+  
+  <div class="container">
+      <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">     
+        </asp:ContentPlaceHolder> 
+        </div>   
+   
+
+        <footer class="footer">
+            <p class="text-muted">
+           Sean Macfarlane<br />
+           040 779 100<br />
+           sean.g.macfarlane@gmail.com<br />
+                </p>
+        </footer>
+    </form>
+</body>
+</html>

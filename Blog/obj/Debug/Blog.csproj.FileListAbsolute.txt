@@ -1,0 +1,3 @@
+C:\Users\Sean\Documents\GitHub\Assignment1 - Blog\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
+C:\Users\Sean\Documents\GitHub\Assignment1 - Blog\Blog\obj\Debug\Assignment1.dll
+C:\Users\Sean\Documents\GitHub\Assignment1 - Blog\Blog\obj\Debug\Assignment1.pdb

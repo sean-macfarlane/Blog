@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Assignment1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Birth" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Comments" Relationship="Assignment1Model.fk_Comments_Users1" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="Posts" Relationship="Assignment1Model.fk_Posts_Users" FromRole="User" ToRole="Post" />
+    <NavigationProperty Name="BadWords" Relationship="Assignment1Model.fk_BadWords_Users1" FromRole="User" ToRole="BadWord" />
+    <Property Name="Admin" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="Assignment1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <FunctionImport Name="Insert_User" ReturnType="Collection(Int32)">
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="Int32" />
+      <Parameter Name="Birth" Mode="In" Type="DateTime" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Comments" EntityType="Assignment1Model.Comment" />
+    <EntitySet Name="Posts" EntityType="Assignment1Model.Post" />
+    <AssociationSet Name="fk_Comments_Posts1" Association="Assignment1Model.fk_Comments_Posts1">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Comments_Users1" Association="Assignment1Model.fk_Comments_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Posts_Users" Association="Assignment1Model.fk_Posts_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <EntitySet Name="BadWords" EntityType="Assignment1Model.BadWord" />
+    <AssociationSet Name="fk_BadWords_Users1" Association="Assignment1Model.fk_BadWords_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="BadWord" EntitySet="BadWords" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Posts_PostId" Type="Int32" Nullable="false" />
+    <Property Name="Users_UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Assignment1Model.fk_Comments_Posts1" FromRole="Comment" ToRole="Post" />
+    <NavigationProperty Name="User" Relationship="Assignment1Model.fk_Comments_Users1" FromRole="Comment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="PostId" />
+    </Key>
+    <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Users_UserId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Author" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="HtmlText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Assignment1Model.fk_Comments_Posts1" FromRole="Post" ToRole="Comment" />
+    <NavigationProperty Name="User" Relationship="Assignment1Model.fk_Posts_Users" FromRole="Post" ToRole="User" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Comments_Posts1">
+    <End Type="Assignment1Model.Post" Role="Post" Multiplicity="1" />
+    <End Type="Assignment1Model.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="PostId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Posts_PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Comments_Users1">
+    <End Type="Assignment1Model.User" Role="User" Multiplicity="1" />
+    <End Type="Assignment1Model.Comment" Role="Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Posts_Users">
+    <End Type="Assignment1Model.User" Role="User" Multiplicity="1" />
+    <End Type="Assignment1Model.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BadWord">
+    <Key>
+      <PropertyRef Name="BadWordId" />
+    </Key>
+    <Property Name="BadWordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Users_UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Assignment1Model.fk_BadWords_Users1" FromRole="BadWord" ToRole="User" />
+  </EntityType>
+  <Association Name="fk_BadWords_Users1">
+    <End Type="Assignment1Model.User" Role="User" Multiplicity="1" />
+    <End Type="Assignment1Model.BadWord" Role="BadWord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BadWord">
+        <PropertyRef Name="Users_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

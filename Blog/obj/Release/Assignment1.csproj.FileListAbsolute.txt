@@ -1,0 +1,9 @@
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Assignment1.dll.config
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Assignment1.dll
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\Assignment1.pdb
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\EntityFramework.dll
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\EntityFramework.SqlServer.dll
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\EntityFramework.xml
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\bin\EntityFramework.SqlServer.xml
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\obj\Release\Assignment1.dll
+C:\Users\Sean\documents\visual studio 2013\Projects\Assignment1\Assignment1\obj\Release\Assignment1.pdb

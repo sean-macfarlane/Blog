@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap>
+  <siteMapNode title="Home" url="~/Default.aspx">
+    <siteMapNode title="Register" url="~/Register.aspx"></siteMapNode>
+    <siteMapNode title="Login" url="~/Login.aspx"></siteMapNode>
+    <siteMapNode title="Edit Account" url="~/EditUser.aspx"></siteMapNode>
+    <siteMapNode title="Post" url="~/FullBlogPost.aspx"></siteMapNode>
+    <siteMapNode title="Admin Home" url="~/Admin/AdminHome.aspx">
+      <siteMapNode title="Add Blog Post" url="~/Admin/AddBlogPost.aspx"></siteMapNode>
+      <siteMapNode title="Edit Blog Post" url="~/Admin/EditBlogPost.aspx"></siteMapNode>
+      <siteMapNode title="Bad Words" url="~/Admin/BadWords.aspx"></siteMapNode>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
